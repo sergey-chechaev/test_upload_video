@@ -29,7 +29,7 @@ class VideoPostsController < ApplicationController
 
     respond_to do |format|
       if @video_post.save
-				OriginLoadWorker.perform_async(@video_post.id, video_post_params["video_path"].tempfile.path)
+        OriginLoadWorker.perform_async(@video_post.id, video_post_params["video_path"].tempfile.path)
         format.html { redirect_to @video_post, notice: 'Video post was successfully created.' }
         format.json { render :show, status: :created, location: @video_post }
       else
@@ -44,7 +44,7 @@ class VideoPostsController < ApplicationController
   def update
     respond_to do |format|
       if @video_post.update(video_post_params)
-				WatermarkWorker.perform_async(@video_post.id)
+        WatermarkWorker.perform_async(@video_post.id)
         format.html { redirect_to @video_post, notice: 'Video post was successfully updated.' }
         format.json { render :show, status: :ok, location: @video_post }
       else
