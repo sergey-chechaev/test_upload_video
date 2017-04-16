@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @video_post.title %>
+</p>
+
+<p>
+  <strong>Watermark:</strong>
+  <%= @video_post.watermark %>
+</p>
+<% if @video_post.status == VideoPost::STATUS[:not_tagged]%>
+  <p>
+    Видео не загрузилось
+  </p>
+<% else %>
+  <%= video_tag @video_post.watered_video.url, :size => "320x240", :controls => true %><Paste>
+<% end %>
+
+<%= link_to 'Edit', edit_video_post_path(@video_post) %> |
+<%= link_to 'Back', video_posts_path %>
